@@ -1,4 +1,6 @@
+# Backend_IC_Fisio
 
+Sistema realizado em Nestjs, postgres e docker para IC25 do Ehealth do Inatel onde foi criado um sistema para controle de pacientes de fisioterapeutas
 
 ## Table of Contents
 
@@ -11,17 +13,19 @@
 
 ## Features
 
-- [X] Database ([typeorm](https://www.npmjs.com/package/typeorm)).
-- [X] Seeding.
-- [X] Config Service ([@nestjs/config](https://www.npmjs.com/package/@nestjs/config)).
-- [X] Mailing ([nodemailer](https://www.npmjs.com/package/nodemailer), [@nestjs-modules/mailer](https://www.npmjs.com/package/@nestjs-modules/mailer)).
-- [X] Sign in and sign up via email.
-- [X] Admin, ISP and User roles.
-- [X] I18N ([nestjs-i18n](https://www.npmjs.com/package/nestjs-i18n)).
-- [X] File uploads. Support local and Amazon S3 drivers.
-- [X] Swagger.
-- [X] E2E and units tests.
-- [X] Docker.
+- [x] Database ([typeorm](https://www.npmjs.com/package/typeorm)).
+- [x] Seeding.
+- [x] Config Service ([@nestjs/config](https://www.npmjs.com/package/@nestjs/config)).
+- [x] Mailing ([nodemailer](https://www.npmjs.com/package/nodemailer), [@nestjs-modules/mailer](https://www.npmjs.com/package/@nestjs-modules/mailer)).
+- [x] Sign in and sign up via email.
+- [x] Admin, ISP and User roles.
+- [x] I18N ([nestjs-i18n](https://www.npmjs.com/package/nestjs-i18n)).
+- [x] File uploads. Support local and Amazon S3 drivers.
+- [x] Swagger.
+- [x] E2E and units tests.
+- [x] Docker.
+- [x] Pacient Module (CRUD)
+- [x] Session Module (CRUD)
 
 ## Quick run
 
@@ -65,7 +69,7 @@ yarn start:dev
 Generate migration
 
 ```bash
-yarn migration:generate -- src/database/migrations/CreateNameTable 
+yarn migration:generate -- src/database/migrations/CreateNameTable
 ```
 
 Run migration
