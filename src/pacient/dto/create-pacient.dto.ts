@@ -1,13 +1,9 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { 
   IsNotEmpty,
-  MinLength, 
   IsString,
-  Min, 
-  Max,
   IsNumber,
 } from 'class-validator';
-import e from 'express';
 
 export class CreatePacientDto {
   @ApiProperty({ example: 'John' })
@@ -17,9 +13,13 @@ export class CreatePacientDto {
 
   @ApiProperty({ example: 'Doe' })
   @IsNotEmpty()
-  @MinLength(2)
   @IsString()
   lastName: string;
+
+  @ApiProperty({ example: "masculino" })
+  @IsNotEmpty()
+  @IsString()
+  gender: string;
 
   @ApiProperty({ example: 18})
   @IsNotEmpty()
@@ -27,25 +27,35 @@ export class CreatePacientDto {
   age: number;
 
   @ApiProperty()
+  @IsString()
+  ifChildWasItPremature: string;
+
+  @ApiProperty()
+  @IsString()
+  ifChildHadIncurrenceDuringPregnancy: string;
+
+  @ApiProperty()
+  @IsString()
+  ifChildHowWasChildbirth: string;  
+
+  @ApiProperty({ example: "Santa Rita do Sapucaí" })
   @IsNotEmpty()
   @IsString()
-  problem: string;
+  city: string;
 
-  @ApiProperty({example: 10})
-  @IsNotEmpty()
-  @IsNumber()
-  @Min(0)
-  @Max(10)
-  problemSeverity: number;
-
-  @ApiProperty({example: 85.6})
-  @IsNotEmpty()
-  @IsNumber()
-  weight: number;
-
-  @ApiProperty({example: 'none'})
+  @ApiProperty({ example: "MG" })
   @IsNotEmpty()
   @IsString()
-  allergies: string;
+  state: string;
+
+  @ApiProperty({ example: "37701-000" })
+  @IsNotEmpty()
+  @IsString()
+  cep: string;
+
+  @ApiProperty({ example: "(35) 99999-9999" })
+  @IsNotEmpty()
+  @IsString()
+  tel: string;
 }
 

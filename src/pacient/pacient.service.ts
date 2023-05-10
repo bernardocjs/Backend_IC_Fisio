@@ -11,9 +11,9 @@ export class PacientService {
     @InjectRepository(PacientEntity)
     private pacientRepository: Repository<PacientEntity>
   ) {}
-  create(userId: string, createPacientDto: CreatePacientDto) {
+  async create(userId: string, createPacientDto: CreatePacientDto) {
     try {
-      const hasPaciente = this.pacientRepository.find({
+      const hasPaciente = await this.pacientRepository.findOne({
         where: {
           user: { id: userId },
           firstName: createPacientDto.firstName,
@@ -21,8 +21,8 @@ export class PacientService {
       });
       if (hasPaciente) throw new HttpException("Paciente already exists", 400);
       
-      const createdPaciente = this.pacientRepository.save({
-        userId,
+      const createdPaciente = await this.pacientRepository.save({
+        user: { id: userId },
         ...createPacientDto,
       });
       if (!createdPaciente) throw new HttpException("Pacient not created", 400);
@@ -33,17 +33,19 @@ export class PacientService {
     }
   }
 
-  findAll(userId: string) {
-    return this.pacientRepository.find({
+  async findAll(userId: string) {
+    const response = await this.pacientRepository.find({
       where: {
         user: { id: userId },
       },
     });
+
+    return response;
   }
 
-  findOne(id: string, userId: string) {
+  async findOne(id: string, userId: string) {
     try {
-      const foundPaciente = this.pacientRepository.findOne({
+      const foundPaciente = await this.pacientRepository.findOne({
         where: {
           id: id,
           user: { id: userId },
@@ -56,28 +58,28 @@ export class PacientService {
     }
   }
 
-  update(id: string, userId: string, updatePacientDto: UpdatePacientDto) {
-    const foundPaciente = this.pacientRepository.findOne({
+  async update(id: string, userId: string, updatePacientDto: UpdatePacientDto) {
+    const foundPaciente = await this.pacientRepository.findOne({
       where: {
         id: id,
         user: { id: userId },
       },
     });
     if (!foundPaciente) throw new HttpException("Pacient not found", 404);
-    const updatedPaciente = this.pacientRepository.update(id, {
+    const updatedPaciente = await this.pacientRepository.update(id, {
       ...updatePacientDto,
     });
     return updatedPaciente;
   }
 
-  remove(id: string, userId: string) {
-    const foundPaciente = this.pacientRepository.findOne({
+  async remove(id: string, userId: string) {
+    const foundPaciente = await this.pacientRepository.findOne({
       where: {
         id: id,
         user: { id: userId },
       },
     });
     if(!foundPaciente) throw new HttpException("Pacient not found", 404);
-    return this.pacientRepository.softDelete(id);
+    return await this.pacientRepository.softDelete(id);
   }
 }

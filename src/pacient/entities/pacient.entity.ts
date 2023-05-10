@@ -16,19 +16,31 @@ import { Column, CreateDateColumn, DeleteDateColumn, Entity, Index, ManyToOne, O
     lastName: string;
 
     @Column()
+    gender: string;
+
+    @Column()
     age: number;
 
     @Column()
-    problem: string;
+    ifChildWasItPremature: string;
 
     @Column()
-    problemSeverity: number;
+    ifChildHadIncurrenceDuringPregnancy: string;
 
     @Column()
-    weight: number;
+    ifChildHowWasChildbirth: string;
 
     @Column()
-    allergies: string;
+    city: string;
+
+    @Column()
+    state: string;
+
+    @Column()
+    cep: string;
+
+    @Column()
+    tel: string;
 
     @ManyToOne(() => User, (user) => user.pacients)
     user: User;
